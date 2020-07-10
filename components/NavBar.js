@@ -6,13 +6,14 @@ import { Input } from "antd";
 const NavBarDiv = styled.div`
   display: flex;
   justify-content: space-around;
+  position: fixed;
+  top: 0;
   align-items: center;
-  height: 60px;
+  height: 80px;
   width: 100%;
   padding: 5px 0;
-  background: var(--secondary);
+  background: var(--primary);
   font-family: var(--core-font);
-  color: --var(on-primary-light);
   box-shadow: 0px -2px 15px rgba(50, 50, 50, 0.45);
   a {
     color: inherit;
@@ -22,9 +23,14 @@ const NavBarDiv = styled.div`
     color: var(--highlight);
   }
 `;
-
+const Image = styled.img`
+  display: block;
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+`;
 const NavBar = props => (
   <NavBarDiv>
+    <Image src="/Trouver-logo.png" />
     <Input
       placeholder="Hello, Search your favourite beverage !"
       style={{ width: "50%" }}

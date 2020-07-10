@@ -4,7 +4,7 @@ import NavBar from "../components/NavBar";
 import navButtons from "../config/buttons";
 import styled from "styled-components";
 
-const Layout = styled.div`
+const LayoutDiv = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -14,26 +14,26 @@ const Layout = styled.div`
 const Content = styled.div`
   flex: 1;
   display: flex;
-  justify-content: center;
   align-items: center;
-  width: 100%;
-  background: var(--secondary);
+  width: 95%;
+  background: var(--primary);
   color: var(--on-secondary);
+  margin: auto;
   font-family: var(--core-font);
   a {
     color: inherit;
   }
 `;
 
-const LayoutContainer = props => {
+const Layout = props => {
   const appTitle = `> TROUVER`;
 
   return (
-    <Layout>
+    <LayoutDiv>
       <Content>{props.children}</Content>
       <NavBar navButtons={navButtons} />
-    </Layout>
+    </LayoutDiv>
   );
 };
 
-export default LayoutContainer;
+export default Layout;

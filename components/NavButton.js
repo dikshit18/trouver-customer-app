@@ -6,25 +6,32 @@ const Icon = styled.div`
   width: 42px;
   height: 42px;
   border-radius: 2px;
-  background: #eee;
+  background: var(--primary);
   display: inline-block;
   vertical-align: middle;
+  margin-top: 6px;
+  margin-right: -1rem;
 `;
 const Label = styled.span`
   font-size: 12px;
   text-transform: capitalize;
 `;
-const NavButton = props => (
-  <Link href={props.path}>
-    <div
-      className={`NavButton ${
-        props.router.pathname === props.path ? "active" : ""
-      }`}
-    >
-      <Icon>{props.icon}</Icon>
-      <Label>{props.label}</Label>
-    </div>
-  </Link>
-);
+
+const NavButton = props => {
+  const getColor = () =>
+    props.router.pathname === props.path ? "var(--highlight)" : "";
+  return (
+    <Link href={props.path}>
+      <div
+        style={{
+          color: getColor()
+        }}
+      >
+        <Icon>{props.icon}</Icon>
+        <Label>{props.label}</Label>
+      </div>
+    </Link>
+  );
+};
 
 export default withRouter(NavButton);
