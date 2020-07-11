@@ -26,8 +26,6 @@ const Content = styled.div`
 `;
 
 const Layout = props => {
-  const appTitle = `> TROUVER`;
-
   return (
     <LayoutDiv>
       <Content>{props.children}</Content>

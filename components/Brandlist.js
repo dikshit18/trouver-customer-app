@@ -2,23 +2,23 @@ import { List, Typography, Divider, Checkbox } from "antd";
 import styled from "styled-components";
 
 const data = [
-  <Checkbox>Kingfisher</Checkbox>,
-  <Checkbox>Kingfisher</Checkbox>,
-  <Checkbox>Budwweiser</Checkbox>,
-  <Checkbox>Miller</Checkbox>,
-  <Checkbox>Carlsberg</Checkbox>,
-  <Checkbox>Stella Artois</Checkbox>,
-  <Checkbox>Corona</Checkbox>,
-  <Checkbox>Godfather</Checkbox>,
-  <Checkbox>Thunderbolt</Checkbox>
+  <Checkbox>Beers</Checkbox>,
+  <Checkbox>Whiskeys</Checkbox>,
+  <Checkbox>Scotch</Checkbox>,
+  <Checkbox>Rum</Checkbox>,
+  <Checkbox>Vodka</Checkbox>,
+  <Checkbox>Tequilla</Checkbox>,
+  <Checkbox>Gin</Checkbox>
 ];
 const ListDiv = styled(List)`
-  width: 90%;
-  margin: auto;
+  width: 100%;
 `;
 export default function Brandlist() {
   return (
     <ListDiv
+      style={{
+        marginTop: "0.5rem"
+      }}
       size="large"
       header={<div>What's your choice?</div>}
       bordered
