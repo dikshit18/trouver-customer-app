@@ -21,7 +21,7 @@ export default props => {
       cover={
         <img
           alt="example"
-          src="https://images-na.ssl-images-amazon.com/images/I/615zfRYaDcL._SL1280_.jpg"
+          src="https://media-verticommnetwork1.netdna-ssl.com/wines/100-pipers-75cl-1503334-s237_e.jpg"
         />
       }
     />

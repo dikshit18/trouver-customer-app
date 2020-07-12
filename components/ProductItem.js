@@ -3,17 +3,21 @@ import {
   Checkbox,
   Row,
   Col,
-  Input,
+  Tooltip,
+  Tag,
   Button,
   Divider,
   Rate,
-  Typography
+  Typography,
+  InputNumber
 } from "antd";
 import styled from "styled-components";
 import {
   ShoppingCartOutlined,
   ShoppingOutlined,
-  PicCenterOutlined
+  PicCenterOutlined,
+  CarOutlined,
+  ExclamationCircleOutlined
 } from "@ant-design/icons";
 const { Title, Text } = Typography;
 const data = [
@@ -68,14 +72,39 @@ export default props => {
     alcoholPercent,
     category,
     description,
-    inStock
+    inStock,
+    quantity
   } = product.meta;
   return (
     <>
       <Row>
         <Col span={16}>
           <StyledHeader level={2}>{product.name}</StyledHeader>
-          <Rate allowHalf defaultValue={rating} disabled />
+          <Row>
+            <Col span={8}>
+              <Rate allowHalf defaultValue={rating} disabled />
+            </Col>
+            <Col span={16}>
+              <Tooltip placement="top" title={product.meta.offers.description}>
+                <Tag color="#108ee9" style={{ float: "right" }}>
+                  OFFERS
+                </Tag>
+              </Tooltip>
+              <Text style={{ float: "right" }}>
+                <Tag color="red">{`${category}`}</Tag>
+              </Text>
+              <Text>
+                <Tag
+                  color="geekblue"
+                  style={{ float: "right" }}
+                >{`${alcoholPercent}% v/v`}</Tag>
+              </Text>
+
+              <Text style={{ float: "right" }}>
+                <Tag color="geekblue">{`${quantity}`}</Tag>
+              </Text>
+            </Col>
+          </Row>
           <Divider />
           <Row>
             <Col>
@@ -103,15 +132,35 @@ export default props => {
               </Text>
             </Col>
           </Row>
+
           <Row>
-            <Col span={8}>
-              <Text>
-                <PicCenterOutlined style={{ fontSize: "6rem" }} />
+            <Col style={{ marginBlock: "5rem" }}>
+              <Text>You save:</Text>
+            </Col>
+            <Col>
+              <Text
+                style={{
+                  marginLeft: "0.2rem",
+                  //fontSize: "1.5rem",
+                  color: "#B6533C"
+                }}
+              >
+                {`₹${+mrp - +discountedPrice}`}
               </Text>
-              <Text>No contact delivery</Text>
             </Col>
           </Row>
           <Row>
+            <Col span={16}>
+              <InputNumber
+                type="number"
+                min={1}
+                max={10}
+                placeholder="Enter the quantity"
+                style={{ width: "60%", marginTop: "1rem" }}
+              />
+            </Col>
+          </Row>
+          <Row style={{ marginTop: "2rem" }}>
             <Col span={10}>
               <Button type="primary" style={{ width: "90%" }}>
                 <ShoppingOutlined />
@@ -123,6 +172,41 @@ export default props => {
                 <ShoppingCartOutlined />
                 Add to cart
               </Button>
+            </Col>
+          </Row>
+          <Divider />
+          <Row>
+            <Col>
+              <Text
+                style={{
+                  marginLeft: "0.2rem",
+                  fontSize: "1.5rem",
+                  color: "#B6533C"
+                }}
+              >
+                {`${inStock ? "In Stock." : "Out of Stock."}`}
+              </Text>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Text
+                style={{
+                  marginLeft: "0.2rem"
+                }}
+              >
+                Delivered By:
+              </Text>
+            </Col>
+            <Col>
+              <Text
+                strong
+                style={{
+                  marginLeft: "0.2rem"
+                }}
+              >
+                Friday,10 July
+              </Text>
             </Col>
           </Row>
           {/* <Row style={{ marginTop: ".2rem" }}>

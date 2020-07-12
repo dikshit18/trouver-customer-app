@@ -13,7 +13,8 @@ const products = {
         alcoholPercent: "8",
         category: "Rum",
         inStock: "true",
-        cover: "S3ImageURL",
+        cover:
+          "https://media-verticommnetwork1.netdna-ssl.com/wines/100-pipers-75cl-1503334-s237_e.jpg",
         quantity: "650ml",
         rating: "2",
         malt: "scotch",
@@ -130,80 +131,84 @@ const products = {
 };
 
 export default function BeverageCard(props) {
+  const { products } = props;
+  console.log(products);
   return (
     <div style={{ display: "flex" }}>
       <Row gutter={[8, 16]}>
-        {products.products.map(product => {
-          const {
-            mrp,
-            discountedPrice,
-            alcoholPercent,
-            rating,
-            category,
-            inStock,
-            quantity
-          } = product.meta;
-          return (
-            <Col id={product.id} span={8}>
-              <Link href={`/products/${product.id}`}>
-                <Card
-                  style={{ margin: "0.5rem", cursor: "pointer" }}
-                  cover={
-                    <img
-                      alt="example"
-                      src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                    />
-                  }
-                >
-                  <Row>
-                    <Col span={16}>
-                      <Meta title={product.name} />
-                    </Col>
-                    <Col span={4}>
-                      <Text style={{ float: "right" }}>
-                        <Tag color="red">{`${category}`}</Tag>
-                      </Text>
-                    </Col>
-                    <Col span={4}>
-                      <Tooltip
-                        placement="top"
-                        title={product.meta.offers.description}
-                      >
-                        <Tag color="#108ee9">OFFERS</Tag>
-                      </Tooltip>
-                    </Col>
-                  </Row>
-                  <Row style={{ marginTop: ".2rem" }}>
-                    <Col span={16}>
-                      <Text>₹{discountedPrice}</Text>
-                      <Text delete style={{ marginLeft: "0.2rem" }}>
-                        {`₹${mrp}` || null}
-                      </Text>
-                    </Col>
-                    <Col span={4}>
-                      <Text style={{ float: "right" }}>
-                        <Tag color="geekblue">{`${quantity}`}</Tag>
-                      </Text>
-                    </Col>
-                    <Col span={4} style={{ float: "right" }}>
-                      <Text>
-                        <Tag color="geekblue">{`${alcoholPercent}% v/v`}</Tag>
-                      </Text>
-                    </Col>
-                  </Row>
-                  <Row style={{ marginTop: ".2rem" }}>
-                    <Col span={24}>
-                      <Text type="warning">
-                        {inStock ? "In stock" : "Out of stock"}
-                      </Text>
-                    </Col>
-                  </Row>
-                  <Rate allowHalf defaultValue={rating} disabled />
-                </Card>
-              </Link>
-            </Col>
-          );
-        })}
+        {products.length &&
+          products.map(product => {
+            const {
+              mrp,
+              discountedPrice,
+              alcoholPercent,
+              rating,
+              category,
+              inStock,
+              quantity,
+              cover
+            } = product.meta;
+            return (
+              <Col id={product.id} span={8}>
+                <Link href={`/products/${product.id}`}>
+                  <Card
+                    style={{
+                      margin: "0.5rem",
+                      cursor: "pointer"
+                    }}
+                    cover={<img alt="example" src={cover} />}
+                  >
+                    <Row>
+                      <Col span={16}>
+                        <Meta title={product.name} />
+                      </Col>
+                      <Col span={4}>
+                        <Text style={{ float: "right" }}>
+                          <Tag color="red">{`${category}`}</Tag>
+                        </Text>
+                      </Col>
+                      {product.meta.offers ? (
+                        <Col span={4}>
+                          <Tooltip
+                            placement="top"
+                            title={product.meta.offers.description}
+                          >
+                            <Tag color="#108ee9">OFFERS</Tag>
+                          </Tooltip>
+                        </Col>
+                      ) : null}
+                    </Row>
+                    <Row style={{ marginTop: ".2rem" }}>
+                      <Col span={16}>
+                        <Text>₹{discountedPrice}</Text>
+                        <Text delete style={{ marginLeft: "0.2rem" }}>
+                          {`₹${mrp}` || null}
+                        </Text>
+                      </Col>
+                      <Col span={4}>
+                        <Text style={{ float: "right" }}>
+                          <Tag color="geekblue">{`${quantity}`}</Tag>
+                        </Text>
+                      </Col>
+                      <Col span={4} style={{ float: "right" }}>
+                        <Text>
+                          <Tag color="geekblue">{`${alcoholPercent}% v/v`}</Tag>
+                        </Text>
+                      </Col>
+                    </Row>
+                    <Row style={{ marginTop: ".2rem" }}>
+                      <Col span={24}>
+                        <Text type="warning">
+                          {inStock ? "In stock" : "Out of stock"}
+                        </Text>
+                      </Col>
+                    </Row>
+                    <Rate allowHalf defaultValue={rating} disabled />
+                  </Card>
+                </Link>
+              </Col>
+            );
+          })}
       </Row>
     </div>
   );
