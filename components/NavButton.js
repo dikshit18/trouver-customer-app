@@ -1,6 +1,9 @@
+import { useState } from "react";
 import Link from "next/link";
 import { withRouter } from "next/router";
 import styled from "styled-components";
+import CartModal from "./CartModal";
+import { Modal, Badge } from "antd/";
 const Icon = styled.div`
   font-size: 20px;
   width: 42px;
@@ -18,17 +21,29 @@ const Label = styled.span`
 `;
 
 const NavButton = props => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const onClickHandler = () => {
+    setIsModalOpen(true);
+  };
+  const onCloseHandler = () => {
+    setIsModalOpen(false);
+  };
   const getColor = () =>
     props.router.pathname === props.path ? "var(--highlight)" : "";
   return (
-    <Link href={props.path}>
+    <Link href={props.path && props.path}>
       <div
         style={{
           color: getColor()
         }}
+        onClick={props.label === "My Cart" && (() => onClickHandler())}
       >
-        <Icon>{props.icon}</Icon>
+        <Icon>
+          {props.icon}
+          {/* <Badge count={}>{props.icon}</Badge> */}
+        </Icon>
         <Label>{props.label}</Label>
+        <CartModal visible={isModalOpen} handleCancel={onCloseHandler} />
       </div>
     </Link>
   );

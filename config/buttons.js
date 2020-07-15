@@ -7,6 +7,7 @@ import {
   ShoppingCartOutlined,
   ProfileOutlined
 } from "@ant-design/icons";
+import CartModal from "../components/CartModal";
 const navButtons = [
   {
     label: "Orders",
@@ -20,8 +21,9 @@ const navButtons = [
   },
   {
     label: "My Cart",
-    path: "/cart",
-    icon: <ShoppingCartOutlined />
+    path: "",
+    icon: <ShoppingCartOutlined />,
+    onClickHandler: CartModal
   },
   {
     label: "Profile",
