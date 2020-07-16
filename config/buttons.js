@@ -16,14 +16,13 @@ const navButtons = [
   },
   {
     label: "Login/Signup",
-    path: "/login",
+    path: "/auth",
     icon: <LoginOutlined />
   },
   {
     label: "My Cart",
-    path: "",
-    icon: <ShoppingCartOutlined />,
-    onClickHandler: CartModal
+    path: "/auth",
+    icon: <ShoppingCartOutlined />
   },
   {
     label: "Profile",

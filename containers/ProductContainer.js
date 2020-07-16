@@ -2,8 +2,26 @@ import { Row, Col } from "antd";
 import Layout from "../containers/LayoutContainer";
 import ProductCover from "../components/ProductCover";
 import ProductItem from "../components/ProductItem";
+import {
+  addToLocalStorage,
+  fetchFromLocalStorage
+} from "../config/localStorage";
 
 export default function ProductContainer(props) {
+  const addToCartHandler = item => {
+    const items = fetchFromLocalStorage("cartItems");
+    console.log(item);
+    if (items) {
+      items.products.push(item);
+      console.log(items);
+    }
+    addToLocalStorage(
+      "cartItems",
+      JSON.stringify({
+        products: [items || item]
+      })
+    );
+  };
   return (
     <Layout>
       <Row style={{ width: "100%" }}>
@@ -11,7 +29,7 @@ export default function ProductContainer(props) {
           <ProductCover />
         </Col>
         <Col span={14}>
-          <ProductItem />
+          <ProductItem addToCart={addToCartHandler} />
         </Col>
       </Row>
     </Layout>

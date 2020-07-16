@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { withRouter } from "next/router";
 import styled from "styled-components";
@@ -39,8 +39,9 @@ const NavButton = props => {
         onClick={props.label === "My Cart" && (() => onClickHandler())}
       >
         <Icon>
-          {props.icon}
-          {/* <Badge count={}>{props.icon}</Badge> */}
+          <Badge count={props.label === "My Cart" ? props.badge : 0}>
+            {props.icon}
+          </Badge>
         </Icon>
         <Label>{props.label}</Label>
         <CartModal visible={isModalOpen} handleCancel={onCloseHandler} />

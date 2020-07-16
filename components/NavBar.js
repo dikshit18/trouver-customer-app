@@ -1,8 +1,9 @@
 // components/NavBar.js
-
+import React, { useEffect, useState } from "react";
 import NavButton from "./NavButton";
 import styled from "styled-components";
 import { Input } from "antd";
+import { fetchFromLocalStorage } from "../config/localStorage";
 const NavBarDiv = styled.div`
   display: flex;
   justify-content: space-around;
@@ -28,22 +29,37 @@ const Image = styled.img`
   margin-left: 2rem;
   margin-bottom: 1rem;
 `;
-const NavBar = props => (
-  <NavBarDiv>
-    <Image src="/Trouver-logo.png" />
-    <Input
-      placeholder="Hello, Search your favourite beverage !"
-      style={{ width: "50%" }}
-    />
-    {props.navButtons.map(button => (
-      <NavButton
-        key={button.path}
-        path={button.path}
-        label={button.label}
-        icon={button.icon}
+const NavBar = props => {
+  const [cartItemsCount, setCartItemsCount] = useState(0);
+  useEffect(() => {
+    document.addEventListener(
+      "itemInserted",
+      () => {
+        const items = fetchFromLocalStorage("cartItems");
+        setCartItemsCount(items.products.length);
+      },
+      false
+    );
+  }, []);
+
+  return (
+    <NavBarDiv>
+      <Image src="/Trouver-logo.png" />
+      <Input
+        placeholder="Hello, Search your favourite beverage !"
+        style={{ width: "50%" }}
       />
-    ))}
-  </NavBarDiv>
-);
+      {props.navButtons.map(button => (
+        <NavButton
+          key={button.path}
+          path={button.path}
+          label={button.label}
+          icon={button.icon}
+          badge={cartItemsCount}
+        />
+      ))}
+    </NavBarDiv>
+  );
+};
 
 export default NavBar;

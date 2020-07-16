@@ -75,6 +75,7 @@ export default props => {
     inStock,
     quantity
   } = product.meta;
+  const { addToCart } = props;
   return (
     <>
       <Row>
@@ -168,7 +169,11 @@ export default props => {
               </Button>
             </Col>
             <Col span={10}>
-              <Button type="primary" style={{ width: "90%" }}>
+              <Button
+                type="primary"
+                style={{ width: "90%" }}
+                onClick={() => addToCart(product)}
+              >
                 <ShoppingCartOutlined />
                 Add to cart
               </Button>

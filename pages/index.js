@@ -24,7 +24,6 @@ export async function getStaticProps(ctx) {
   // If the route is like /posts/1, then params.id is 1
   let products = [];
   try {
-    console.log("Here");
     const response = await axios.get(ENDPOINTS.PRODUCTS);
     products = response.data.products;
     console.log("Products are ", products);
