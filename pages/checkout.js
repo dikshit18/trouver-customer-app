@@ -1,6 +1,5 @@
 import React from "react";
-import OrdersContainer from "../containers/OrdersContainer";
-import withAuth from "./withAuth";
+import CheckoutContainer from "../containers/CheckoutContainer";
 
 const content = {
   marginTop: "100px",
@@ -9,8 +8,9 @@ const content = {
 const Order = (props) => {
   return (
     <div style={content}>
-      <OrdersContainer />
+      <CheckoutContainer />
     </div>
   );
 };
-export default withAuth(Order);
+// export default withAuth(Order);
+export default Order;

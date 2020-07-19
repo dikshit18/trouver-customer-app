@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Card,
   Checkbox,
@@ -9,7 +10,7 @@ import {
   Divider,
   Rate,
   Typography,
-  InputNumber
+  InputNumber,
 } from "antd";
 import styled from "styled-components";
 import {
@@ -17,53 +18,52 @@ import {
   ShoppingOutlined,
   PicCenterOutlined,
   CarOutlined,
-  ExclamationCircleOutlined
+  ExclamationCircleOutlined,
 } from "@ant-design/icons";
 const { Title, Text } = Typography;
-const data = [
-  <Checkbox>Beers</Checkbox>,
-  <Checkbox>Whiskeys</Checkbox>,
-  <Checkbox>Scotch</Checkbox>,
-  <Checkbox>Rum</Checkbox>,
-  <Checkbox>Vodka</Checkbox>,
-  <Checkbox>Tequilla</Checkbox>,
-  <Checkbox>Gin</Checkbox>
-];
-const ListDiv = styled(Card)`
-  width: 100%;
-`;
-const product = {
-  id: "2134568",
-  name: "Kingfisher Ultra ",
-  meta: {
-    alcoholPercent: "8",
-    category: "Beer",
-    cover: "S3ImageURL",
-    quantity: "650ml",
-    inStock: "true",
-    rating: "2",
-    malt: "scotch",
-    rating: 2.5,
-    mrp: "250",
-    returnable: false,
-    trouverDelivered: true,
-    noContactDelivery: true,
-    discountedPrice: "200",
-    offers: {
-      offerId: "56477656789",
-      description: "Buy 2 get 1 free."
-    },
-    description: []
-  },
-  seller: {
-    name: "ABC",
-    id: "123213"
-  }
-};
+// const data = [
+//   <Checkbox>Beers</Checkbox>,
+//   <Checkbox>Whiskeys</Checkbox>,
+//   <Checkbox>Scotch</Checkbox>,
+//   <Checkbox>Rum</Checkbox>,
+//   <Checkbox>Vodka</Checkbox>,
+//   <Checkbox>Tequilla</Checkbox>,
+//   <Checkbox>Gin</Checkbox>,
+// ];
+
+// const product = {
+//   id: "2134568",
+//   name: "Kingfisher Ultra ",
+//   meta: {
+//     alcoholPercent: "8",
+//     category: "Beer",
+//     cover: "S3ImageURL",
+//     quantity: "650ml",
+//     inStock: "true",
+//     rating: "2",
+//     malt: "scotch",
+//     rating: 2.5,
+//     mrp: "250",
+//     returnable: false,
+//     trouverDelivered: true,
+//     noContactDelivery: true,
+//     discountedPrice: "200",
+//     offers: {
+//       offerId: "56477656789",
+//       description: "Buy 2 get 1 free.",
+//     },
+//     description: [],
+//   },
+//   seller: {
+//     name: "ABC",
+//     id: "123213",
+//   },
+// };
 const StyledHeader = styled(Title)`
   margin-top: 5rem;
 `;
-export default props => {
+const ProductItem = (props) => {
+  const { addToCart, product } = props;
   const {
     rating,
     discountedPrice,
@@ -73,20 +73,19 @@ export default props => {
     category,
     description,
     inStock,
-    quantity
-  } = product.meta;
-  const { addToCart } = props;
+    quantity,
+  } = product?.meta;
   return (
     <>
       <Row>
         <Col span={16}>
-          <StyledHeader level={2}>{product.name}</StyledHeader>
+          <StyledHeader level={2}>{product?.name}</StyledHeader>
           <Row>
             <Col span={8}>
               <Rate allowHalf defaultValue={rating} disabled />
             </Col>
             <Col span={16}>
-              <Tooltip placement="top" title={product.meta.offers.description}>
+              <Tooltip placement="top" title={product?.meta?.offers?.description}>
                 <Tag color="#108ee9" style={{ float: "right" }}>
                   OFFERS
                 </Tag>
@@ -95,10 +94,7 @@ export default props => {
                 <Tag color="red">{`${category}`}</Tag>
               </Text>
               <Text>
-                <Tag
-                  color="geekblue"
-                  style={{ float: "right" }}
-                >{`${alcoholPercent}% v/v`}</Tag>
+                <Tag color="geekblue" style={{ float: "right" }}>{`${alcoholPercent}% v/v`}</Tag>
               </Text>
 
               <Text style={{ float: "right" }}>
@@ -126,9 +122,8 @@ export default props => {
                 style={{
                   marginLeft: "0.2rem",
                   //fontSize: "1.5rem",
-                  color: "#B6533C"
-                }}
-              >
+                  color: "#B6533C",
+                }}>
                 {`₹${discountedPrice}`}
               </Text>
             </Col>
@@ -143,9 +138,8 @@ export default props => {
                 style={{
                   marginLeft: "0.2rem",
                   //fontSize: "1.5rem",
-                  color: "#B6533C"
-                }}
-              >
+                  color: "#B6533C",
+                }}>
                 {`₹${+mrp - +discountedPrice}`}
               </Text>
             </Col>
@@ -169,11 +163,7 @@ export default props => {
               </Button>
             </Col>
             <Col span={10}>
-              <Button
-                type="primary"
-                style={{ width: "90%" }}
-                onClick={() => addToCart(product)}
-              >
+              <Button type="primary" style={{ width: "90%" }} onClick={() => addToCart(product)}>
                 <ShoppingCartOutlined />
                 Add to cart
               </Button>
@@ -186,9 +176,8 @@ export default props => {
                 style={{
                   marginLeft: "0.2rem",
                   fontSize: "1.5rem",
-                  color: "#B6533C"
-                }}
-              >
+                  color: "#B6533C",
+                }}>
                 {`${inStock ? "In Stock." : "Out of Stock."}`}
               </Text>
             </Col>
@@ -197,9 +186,8 @@ export default props => {
             <Col>
               <Text
                 style={{
-                  marginLeft: "0.2rem"
-                }}
-              >
+                  marginLeft: "0.2rem",
+                }}>
                 Delivered By:
               </Text>
             </Col>
@@ -207,9 +195,8 @@ export default props => {
               <Text
                 strong
                 style={{
-                  marginLeft: "0.2rem"
-                }}
-              >
+                  marginLeft: "0.2rem",
+                }}>
                 Friday,10 July
               </Text>
             </Col>
@@ -244,3 +231,5 @@ export default props => {
     </>
   );
 };
+
+export default ProductItem;

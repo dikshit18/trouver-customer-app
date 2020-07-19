@@ -35,7 +35,7 @@ const NavBar = (props) => {
   useEffect(() => {
     const updateCartCount = () => {
       const items = fetchFromLocalStorage("cartItems");
-      setCartItemsCount(items.products.length);
+      setCartItemsCount(items?.products.length);
     };
     document.addEventListener(
       "itemInserted",
