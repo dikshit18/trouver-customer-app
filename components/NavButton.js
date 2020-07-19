@@ -31,7 +31,7 @@ const NavButton = props => {
   const getColor = () =>
     props.router.pathname === props.path ? "var(--highlight)" : "";
   return (
-    <Link href={props.path && props.path}>
+    <Link href={props?.path ? props.path : ""}>
       <div
         style={{
           color: getColor()

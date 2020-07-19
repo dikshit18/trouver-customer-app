@@ -21,7 +21,6 @@ const navButtons = [
   },
   {
     label: "My Cart",
-    path: "/auth",
     icon: <ShoppingCartOutlined />
   },
   {

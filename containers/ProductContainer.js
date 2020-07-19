@@ -10,10 +10,8 @@ import {
 export default function ProductContainer(props) {
   const addToCartHandler = item => {
     const items = fetchFromLocalStorage("cartItems");
-    console.log(item);
     if (items) {
       items.products.push(item);
-      console.log(items);
     }
     addToLocalStorage(
       "cartItems",

@@ -1,9 +1,10 @@
 // components/NavBar.js
 import React, { useEffect, useState } from "react";
-import NavButton from "./NavButton";
 import styled from "styled-components";
-import { Input } from "antd";
+import { Input, AutoComplete } from "antd";
+import NavButton from "./NavButton";
 import { fetchFromLocalStorage } from "../config/localStorage";
+
 const NavBarDiv = styled.div`
   display: flex;
   justify-content: space-around;
@@ -29,27 +30,39 @@ const Image = styled.img`
   margin-left: 2rem;
   margin-bottom: 1rem;
 `;
-const NavBar = props => {
+const NavBar = (props) => {
   const [cartItemsCount, setCartItemsCount] = useState(0);
   useEffect(() => {
+    const updateCartCount = () => {
+      const items = fetchFromLocalStorage("cartItems");
+      setCartItemsCount(items.products.length);
+    };
     document.addEventListener(
       "itemInserted",
       () => {
-        const items = fetchFromLocalStorage("cartItems");
-        setCartItemsCount(items.products.length);
+        updateCartCount();
       },
       false
     );
+    updateCartCount();
   }, []);
 
   return (
     <NavBarDiv>
       <Image src="/Trouver-logo.png" />
-      <Input
-        placeholder="Hello, Search your favourite beverage !"
-        style={{ width: "50%" }}
-      />
-      {props.navButtons.map(button => (
+      <AutoComplete
+        dropdownMatchSelectWidth={252}
+        style={{
+          width: "50%",
+        }}
+        key="productId"
+        options={props?.suggestions}
+        // onSelect={onSelect}
+        onSearch={props?.onSearch}>
+        <Input.Search size="large" placeholder="Search your favourite beverage !" enterButton />
+      </AutoComplete>
+
+      {props?.navButtons.map((button) => (
         <NavButton
           key={button.path}
           path={button.path}

@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Row, Col } from "antd";
+import { Modal, Row, Col, Label } from "antd";
 import { fetchFromLocalStorage } from "../config/localStorage";
+import styled from "styled-components";
 const products = [
   { name: "Kingfisher Ultra", cover: "", price: 200, quantity: 1 },
   { name: "Kingfisher Premium", cover: "", price: 500, quantity: 2 }
 ];
+const Image = styled.img`
+  height: 40%;
+`;
 const ProductList = props => {
-  console.log("askdhasajhd", props);
   const { name } = props.product;
-  const { cover, discountedPrice, quantity } = props.product;
+  const { cover, discountedPrice, quantity } = props.product.meta;
   return (
     <>
       <Row>
         <Col span={10}>
-          <img
+          <Image
             src={
               "https://media-verticommnetwork1.netdna-ssl.com/wines/100-pipers-75cl-1503334-s237_e.jpg"
             }
@@ -21,7 +24,10 @@ const ProductList = props => {
         </Col>
         <Col span={14}>
           <Row>
-            <Col span={24}>{name}</Col>
+            <Col span={24}>
+              <p>Name</p>
+              {name}
+            </Col>
             <Col span={24}>{discountedPrice}</Col>
             <Col span={24}>{quantity}</Col>
           </Row>
@@ -33,9 +39,7 @@ const ProductList = props => {
 export default props => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    console.log("Hi");
     const items = fetchFromLocalStorage("cartItems");
-    console.log("products", items);
     setProducts(items?.products);
   }, []);
   return (
@@ -47,8 +51,7 @@ export default props => {
       okText="Order Now"
     >
       {products?.map(product => {
-        console.log("sdfsjdf", product);
-        return <ProductList product={product.meta} />;
+        return <ProductList product={product} />;
       })}
       {/* <Row>
         <Col span={10}>

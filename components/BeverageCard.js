@@ -132,7 +132,6 @@ const products = {
 
 export default function BeverageCard(props) {
   const { products } = props;
-  console.log(products);
   return (
     <div style={{ display: "flex" }}>
       <Row gutter={[8, 16]}>

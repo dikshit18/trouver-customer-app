@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Form, Card, Col, Row, Input, Button } from "antd";
+import { Form, Card, Col, Row, Input, Button, Spin } from "antd";
 //import Loader from "./Loader";
 
 const cardStyles = {
   width: "95%",
-  height: "38rem",
   margin: "auto",
   marginTop: "5rem",
   borderRadius: "0.5rem"
@@ -62,6 +61,36 @@ const InputControls = props => {
   ) : (
     ""
   );
+  const nameInitials = isSignUp ? (
+    <>
+      <Label>Firstname</Label>
+      <Form.Item
+        name="firstName"
+        rules={[
+          {
+            required: true,
+            message: "Please confirm your firstname"
+          }
+        ]}
+      >
+        <Input style={{ ...inputBoxStyles }} />
+      </Form.Item>
+      <Label>Lastname</Label>
+      <Form.Item
+        name="lastName"
+        rules={[
+          {
+            required: true,
+            message: "Please confirm your lastname"
+          }
+        ]}
+      >
+        <Input style={{ ...inputBoxStyles }} />
+      </Form.Item>
+    </>
+  ) : (
+    ""
+  );
   const signUpHandler = () => {
     setIsSignUp(!isSignUp);
   };
@@ -72,7 +101,7 @@ const InputControls = props => {
         <Col lg={16} md={16} xs={22} sm={22}>
           <Form
             onFinish={values => {
-              props.onSubmit(values);
+              props.onSignUp(values, isSignUp);
             }}
           >
             <Label>Username</Label>
@@ -88,6 +117,8 @@ const InputControls = props => {
             >
               <Input style={{ ...inputBoxStyles }} />
             </Form.Item>
+            {nameInitials}
+
             <Label>Password</Label>
             <Form.Item
               name="password"
@@ -136,24 +167,22 @@ const InputControls = props => {
 const Auth = props => {
   return (
     <>
-      {/* {props.loading ? (
-        <Loader />
-      ) : ( */}
-      <Row style={props.loading ? { ...fadeStyle } : null}>
-        <Col lg={6} md={6} xs={0} sm={0}></Col>
-        <Col lg={12} md={12} xs={24} sm={24}>
-          <Card style={{ ...cardStyles }}>
-            <Image src="/Trouver-logo.png" />
-            <InputControls
-              onSubmit={values => {
-                props.onSubmit(values);
-              }}
-            />
-          </Card>
-        </Col>
-        <Col lg={6} md={6} xs={0} sm={0}></Col>
-      </Row>
-      {/* )} */}
+      <Spin spinning={props.loading}>
+        <Row style={props.loading ? { ...fadeStyle } : null}>
+          <Col lg={6} md={6} xs={0} sm={0}></Col>
+          <Col lg={12} md={12} xs={24} sm={24}>
+            <Card style={{ ...cardStyles }}>
+              <Image src="/Trouver-logo.png" />
+              <InputControls
+                onSignUp={(values, isSignUp) =>
+                  props.onSignUp(values, isSignUp)
+                }
+              />
+            </Card>
+          </Col>
+          <Col lg={6} md={6} xs={0} sm={0}></Col>
+        </Row>
+      </Spin>
     </>
   );
 };

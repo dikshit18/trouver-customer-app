@@ -1,3 +1,4 @@
+import React from "react";
 import { Row, Col } from "antd";
 import Layout from "./LayoutContainer";
 import Brandlist from "../components/Brandlist";
