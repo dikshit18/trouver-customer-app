@@ -18,7 +18,7 @@ export default function BeverageCard(props) {
               rating,
               category,
               inStock,
-              quantity,
+              volume,
               cover,
             } = product.meta;
             return (
@@ -56,7 +56,7 @@ export default function BeverageCard(props) {
                       </Col>
                       <Col span={4}>
                         <Text style={{ float: "right" }}>
-                          <Tag color="geekblue">{`${quantity}`}</Tag>
+                          <Tag color="geekblue">{`${volume}`}</Tag>
                         </Text>
                       </Col>
                       <Col span={4} style={{ float: "right" }}>

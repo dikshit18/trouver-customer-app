@@ -74,6 +74,7 @@ const ProductItem = (props) => {
     description,
     inStock,
     quantity,
+    volume,
   } = product?.meta;
   return (
     <>
@@ -98,7 +99,7 @@ const ProductItem = (props) => {
               </Text>
 
               <Text style={{ float: "right" }}>
-                <Tag color="geekblue">{`${quantity}`}</Tag>
+                <Tag color="geekblue">{`${volume}`}</Tag>
               </Text>
             </Col>
           </Row>
@@ -197,7 +198,7 @@ const ProductItem = (props) => {
                 style={{
                   marginLeft: "0.2rem",
                 }}>
-                Friday,10 July
+                Friday,24 July
               </Text>
             </Col>
           </Row>

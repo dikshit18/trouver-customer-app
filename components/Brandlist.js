@@ -1,30 +1,27 @@
 import React from "react";
-import { List, Typography, Divider, Checkbox } from "antd";
-import styled from "styled-components";
+import { Row, Checkbox, Divider } from "antd";
 
-const data = [
-  <Checkbox>Beers</Checkbox>,
-  <Checkbox>Whiskeys</Checkbox>,
-  <Checkbox>Scotch</Checkbox>,
-  <Checkbox>Rum</Checkbox>,
-  <Checkbox>Vodka</Checkbox>,
-  <Checkbox>Tequilla</Checkbox>,
-  <Checkbox>Gin</Checkbox>,
-];
-const ListDiv = styled(List)`
-  width: 100%;
-`;
-export default function Brandlist() {
+const data = ["Beer", "Whiskey", "Scotch", "Rum", "Vodka", "Tequilla", "Gin"];
+
+const Brandlist = (props) => {
   return (
-    <ListDiv
-      style={{
-        marginTop: "0.5rem",
-      }}
-      size="large"
-      header={<div>What's your choice?</div>}
-      bordered
-      dataSource={data}
-      renderItem={(item) => <List.Item>{item}</List.Item>}
-    />
+    <>
+      <Checkbox.Group onChange={props?.onChangeFilter}>
+        {data.map((item, index) => {
+          return (
+            <Row key={index}>
+              <Checkbox
+                value={item}
+                style={{ marginTop: "1rem", marginLeft: "1.5rem", width: "100%" }}>
+                {item}
+              </Checkbox>
+              <Divider style={{ width: "100%" }} />
+            </Row>
+          );
+        })}
+      </Checkbox.Group>
+    </>
   );
-}
+};
+
+export default Brandlist;

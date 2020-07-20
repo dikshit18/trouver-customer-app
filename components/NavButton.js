@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { withRouter } from "next/router";
 import styled from "styled-components";
@@ -20,7 +20,7 @@ const Label = styled.span`
   text-transform: capitalize;
 `;
 
-const NavButton = props => {
+const NavButton = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const onClickHandler = () => {
     setIsModalOpen(true);
@@ -28,25 +28,21 @@ const NavButton = props => {
   const onCloseHandler = () => {
     setIsModalOpen(false);
   };
-  const getColor = () =>
-    props.router.pathname === props.path ? "var(--highlight)" : "";
+  const getColor = () => (props.router.pathname === props.path ? "var(--highlight)" : "");
   return (
-    <Link href={props?.path ? props.path : ""}>
-      <div
-        style={{
-          color: getColor()
-        }}
-        onClick={props.label === "My Cart" && (() => onClickHandler())}
-      >
-        <Icon>
-          <Badge count={props.label === "My Cart" ? props.badge : 0}>
-            {props.icon}
-          </Badge>
-        </Icon>
-        <Label>{props.label}</Label>
-        <CartModal visible={isModalOpen} handleCancel={onCloseHandler} />
-      </div>
-    </Link>
+    // <Link href={props?.path ? props.path : ""}>
+    <div
+      style={{
+        color: getColor(),
+      }}
+      onClick={props.label === "My Cart" && (() => onClickHandler())}>
+      <Icon>
+        <Badge count={props.label === "My Cart" ? props.badge : 0}>{props.icon}</Badge>
+      </Icon>
+      <Label>{props.label}</Label>
+      <CartModal visible={isModalOpen} handleCancel={onCloseHandler} />
+    </div>
+    // </Link>
   );
 };
 
